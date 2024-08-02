@@ -9,10 +9,44 @@ class HabitHiveApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Habit Hive',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: _customTheme(),
       home: HomeScreen(),
+    );
+  }
+
+  ThemeData _customTheme() {
+    return ThemeData(
+      primarySwatch: Colors.teal,
+      colorScheme: ColorScheme.light(
+        primary: Colors.teal,
+        secondary: Colors.amber,
+        background: Colors.grey[100],
+        onPrimary: Colors.white,
+        onSecondary: Colors.black,
+      ),
+      appBarTheme: AppBarTheme(
+        color: Colors.teal[800],
+        foregroundColor: Colors.white, // Text color in AppBar
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
+      ),
+      textTheme: TextTheme(
+        displayLarge: TextStyle(color: Colors.teal[800], fontSize: 24, fontWeight: FontWeight.bold),
+        displayMedium: TextStyle(color: Colors.teal[600], fontSize: 22, fontWeight: FontWeight.bold),
+        bodyLarge: TextStyle(color: Colors.black87, fontSize: 16),
+        bodyMedium: TextStyle(color: Colors.black54, fontSize: 14),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.teal,
+        textTheme: ButtonTextTheme.primary,
+      ),
     );
   }
 }
@@ -91,6 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Stats',
           ),
         ],
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        unselectedItemColor: Colors.black54,
+        backgroundColor: Colors.grey[200],
       ),
     );
   }
@@ -125,7 +162,7 @@ class HabitListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Habit Hive'),
+        title: Text('Habit Hive', style: Theme.of(context).appBarTheme.titleTextStyle),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
@@ -135,7 +172,7 @@ class HabitListScreen extends StatelessWidget {
       ),
       body: habits.isEmpty
           ? Center(
-              child: Text('Start a new habit to track progress'),
+              child: Text('Start a new habit to track progress!', style: Theme.of(context).textTheme.bodyLarge),
             )
           : ListView.builder(
               itemCount: habits.length,
@@ -171,14 +208,15 @@ class HabitListItem extends StatelessWidget {
         onChanged: (bool? value) {
           onToggle(habit);
         },
+        activeColor: Theme.of(context).colorScheme.secondary,
       ),
-      title: Text(habit.title),
+      title: Text(habit.title, style: Theme.of(context).textTheme.bodyLarge),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('${habit.completedDays.length} days'),
+          Text('${habit.completedDays.length} days', style: Theme.of(context).textTheme.bodyMedium),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.delete, color: Theme.of(context).colorScheme.error),
             onPressed: () {
               onRemove(habit);
             },
@@ -198,7 +236,7 @@ class AddHabitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('New Habit'),
+      title: Text('New Habit', style: Theme.of(context).textTheme.displayMedium),
       content: TextField(
         controller: _controller,
         decoration: InputDecoration(hintText: 'Enter habit title'),
@@ -233,19 +271,19 @@ class StatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Habit Stats'),
+        title: Text('Habit Stats', style: Theme.of(context).appBarTheme.titleTextStyle),
       ),
       body: habits.isEmpty
           ? Center(
-              child: Text('Start a new habit to track progress'),
+              child: Text('Start a new habit to track progress!', style: Theme.of(context).textTheme.bodyLarge),
             )
           : ListView.builder(
               itemCount: habits.length,
               itemBuilder: (context, index) {
                 final habit = habits[index];
                 return ListTile(
-                  title: Text(habit.title),
-                  subtitle: Text('Completed: ${habit.completedDays.length} days'),
+                  title: Text(habit.title, style: Theme.of(context).textTheme.displayMedium),
+                  subtitle: Text('Completed: ${habit.completedDays.length} days', style: Theme.of(context).textTheme.bodyMedium),
                 );
               },
             ),
