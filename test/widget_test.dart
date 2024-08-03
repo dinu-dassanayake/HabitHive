@@ -6,7 +6,7 @@ import 'package:habit_hive/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const HabitHiveApp());
+    await tester.pumpWidget(HabitHiveApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

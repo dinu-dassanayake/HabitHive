@@ -11,6 +11,7 @@ class HabitHiveApp extends StatelessWidget {
       title: 'Habit Hive',
       theme: _customTheme(),
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 
@@ -18,19 +19,19 @@ class HabitHiveApp extends StatelessWidget {
     return ThemeData(
       primarySwatch: Colors.teal,
       colorScheme: ColorScheme.light(
-        primary: Colors.teal,
-        secondary: Colors.amber,
+        primary: Color.fromARGB(255, 77, 118, 255),
+        secondary: Color.fromARGB(255, 77, 118, 255),
         background: Colors.grey[100],
         onPrimary: Colors.white,
         onSecondary: Colors.black,
       ),
       appBarTheme: AppBarTheme(
-        color: Colors.teal[800],
-        foregroundColor: Colors.white, // Text color in AppBar
+        color: Color.fromARGB(255, 247, 247, 247),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0), // Text color in AppBar
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 37,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: const Color.fromARGB(255, 77, 118, 255),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -38,8 +39,8 @@ class HabitHiveApp extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       textTheme: TextTheme(
-        displayLarge: TextStyle(color: Colors.teal[800], fontSize: 24, fontWeight: FontWeight.bold),
-        displayMedium: TextStyle(color: Colors.teal[600], fontSize: 22, fontWeight: FontWeight.bold),
+        displayLarge: TextStyle(color: Color.fromARGB(255, 77, 118, 255), fontSize: 24, fontWeight: FontWeight.bold),
+        displayMedium: TextStyle(color: Color.fromARGB(255, 77, 118, 255), fontSize: 22, fontWeight: FontWeight.bold),
         bodyLarge: TextStyle(color: Colors.black87, fontSize: 16),
         bodyMedium: TextStyle(color: Colors.black54, fontSize: 14),
       ),
@@ -271,7 +272,7 @@ class StatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Habit Stats', style: Theme.of(context).appBarTheme.titleTextStyle),
+        title: Text('Habit Hive', style: Theme.of(context).appBarTheme.titleTextStyle),
       ),
       body: habits.isEmpty
           ? Center(
