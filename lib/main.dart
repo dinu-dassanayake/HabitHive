@@ -7,12 +7,16 @@ void main() {
 class HabitHiveApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return title();
+  }
+
+  MaterialApp title() {
     return MaterialApp(
-      title: 'Habit Hive',
-      theme: _customTheme(),
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
-    );
+    title: 'Habit Hive',
+    theme: _customTheme(),
+    home: HomeScreen(),
+    debugShowCheckedModeBanner: false,
+  );
   }
 
   ThemeData _customTheme() {
